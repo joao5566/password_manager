@@ -1,0 +1,50 @@
+# Arquivo .gitignore para projetos Python/Tkinter
+
+# Environments
+venv/
+env/
+.venv/
+ENV/
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PyInstaller
+*.spec
+
+# AppImage
+AppDir/
+*.AppImage
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
+
+# Configurações específicas do projeto
+config.ini
+secrets.py
+*.key
+*.pem
