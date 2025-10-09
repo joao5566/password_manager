@@ -23,7 +23,7 @@ def resource_path(relative_path):
 
 window = tk.Tk()
 # window.minsize(300, 700)
-window.configure(padx=50, pady=50)
+window.configure(padx=60, pady=60)
 window.title("Password Manager")
 
 logo_img = tk.PhotoImage(file=resource_path("img/logo.png"))
@@ -40,8 +40,8 @@ canvas.grid(column=1, row=0)
 # -------- formulario --------------#
 
 website_label = tk.Label()
-website_label.config(text="Website")
-website_label.grid(column=2, row=1)
+website_label.config(text="Website:")
+website_label.grid(column=0, row=1)
 
 website_entry = tk.Entry(width=35)
 website_entry.grid(column=1, row=1, columnspan=2, padx=5, pady=5)
@@ -55,15 +55,15 @@ email_user_entry = tk.Entry(width=35)
 email_user_entry.grid(column=1, row=2, columnspan=2, padx=5, pady=5)
 
 password_label = tk.Label()
-password_label.config(text="Password")
+password_label.config(text="Password:")
 password_label.grid(column=0, row=3, padx=5, pady=5)
 
 password_entry = tk.Entry(width=21)
 password_entry.grid(column=1, row=3, padx=5, pady=5)
 
 generate_pass_btn = tk.Button()
-generate_pass_btn.config(text="Generate", width=10)
-generate_pass_btn.grid(column=2, row=3)
+generate_pass_btn.config(text="Generate")
+generate_pass_btn.grid(column=2, row=3, padx=5, pady=5)
 
 add_button = tk.Button()
 add_button.config(text="add", width=35)
