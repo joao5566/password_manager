@@ -23,7 +23,7 @@ def resource_path(relative_path):
 
 window = tk.Tk()
 # window.minsize(300, 700)
-window.configure(padx=20, pady=20)
+window.configure(padx=50, pady=50)
 window.title("Password Manager")
 
 logo_img = tk.PhotoImage(file=resource_path("img/logo.png"))
