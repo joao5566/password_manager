@@ -4,6 +4,8 @@ import sys
 import tkinter as tk
 from tkinter import END, messagebox
 
+import pyperclip
+
 
 # ESSA FUNÇÃO É ESSENCIAL
 def resource_path(relative_path):
@@ -92,6 +94,7 @@ def generate_password():
     password = "".join(password_list)
     password_entry.delete(0, tk.END)
     password_entry.insert(0, password)
+    pyperclip.copy(password)
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
