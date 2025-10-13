@@ -1,7 +1,8 @@
 import os
+import random
 import sys
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import END, messagebox
 
 
 # ESSA FUNÇÃO É ESSENCIAL
@@ -17,7 +18,83 @@ def resource_path(relative_path):
 
     # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
-    # ---------------------------- SAVE PASSWORD ------------------------------- #
+
+def generate_password():
+    # Password Generator Project
+    letters = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+    ]
+    numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    symbols = ["!", "#", "$", "%", "&", "(", ")", "*", "+"]
+
+    nr_letters = random.randint(8, 10)
+    nr_symbols = random.randint(2, 4)
+    nr_numbers = random.randint(2, 4)
+
+    password_letters = [random.choice(letters) for _ in range(nr_letters)]
+    password_symbols = [random.choice(symbols) for _ in range(nr_symbols)]
+    password_numbers = [random.choice(numbers) for _ in range(nr_numbers)]
+    password_list = password_letters + password_symbols + password_numbers
+
+    random.shuffle(password_list)
+
+    password = "".join(password_list)
+    password_entry.delete(0, tk.END)
+    password_entry.insert(0, password)
+
+
+# ---------------------------- SAVE PASSWORD ------------------------------- #
 
 
 def save():
@@ -26,7 +103,7 @@ def save():
     password = password_entry.get()
 
     if len(password) <= 0:
-        messagebox.showerror(title="Burro", message="Você não colocou a senha anta")
+        messagebox.showerror(title="Burro", message=" ")
     elif len(website) <= 0:
         messagebox.showerror(title="Burro", message="Você não colocou o site anta")
     elif len(email) <= 0:
@@ -90,7 +167,7 @@ password_entry = tk.Entry(width=21)
 password_entry.grid(column=1, row=3, padx=5, pady=5)
 
 generate_pass_btn = tk.Button()
-generate_pass_btn.config(text="Generate")
+generate_pass_btn.config(text="Generate", command=generate_password)
 generate_pass_btn.grid(column=2, row=3, padx=5, pady=5)
 
 add_button = tk.Button()
