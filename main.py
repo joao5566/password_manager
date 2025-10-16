@@ -1,11 +1,11 @@
+import json
 import os
 import random
 import sys
 import tkinter as tk
 from tkinter import END, Button, Message, messagebox
-
 import pyperclip
-
+import json
 
 # ESSA FUNÇÃO É ESSENCIAL
 def resource_path(relative_path):
@@ -24,58 +24,8 @@ def resource_path(relative_path):
 def generate_password():
     # Password Generator Project
     letters = [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-        "A",
-        "B",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G",
-        "H",
-        "I",
-        "J",
-        "K",
-        "L",
-        "M",
-        "N",
-        "O",
-        "P",
-        "Q",
-        "R",
-        "S",
-        "T",
-        "U",
-        "V",
-        "W",
-        "X",
-        "Y",
-        "Z",
+        "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w",
+        "x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
     ]
     numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     symbols = ["!", "#", "$", "%", "&", "(", ")", "*", "+"]
@@ -104,16 +54,27 @@ def save():
     website = website_entry.get()
     email = email_user_entry.get()
     password = password_entry.get()
+    
+    new_data = {
+            website:{
+                "email": email,
+                "password":password,
+                }
+            }
 
     if len(website) == 0 or len(password) == 0:
         messagebox.showinfo(
             title="Ooops", message="Please make sure you haven't left any fields empty."
         )
     else:
-        with open("data.json", "a") as data_file:
-            data_file.write(f"{website} | {email} | {password}\n")
-            website_entry.delete(0, tk.END)
-            password_entry.delete(0, tk.END)
+        with open("data.json", "r") as data_file:
+            #json.dump(new_data,data_file,indent=4)
+            data = json.load(data_file)
+            data.update(new_data)
+        with open("data.json","w") as data_file:
+                json.dump(data,data_file,indent=4)
+                website_entry.delete(0, tk.END)
+                password_entry.delete(0, tk.END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
