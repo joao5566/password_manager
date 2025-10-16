@@ -2,7 +2,7 @@ import os
 import random
 import sys
 import tkinter as tk
-from tkinter import END, messagebox
+from tkinter import END, Button, Message, messagebox
 
 import pyperclip
 
@@ -105,23 +105,15 @@ def save():
     email = email_user_entry.get()
     password = password_entry.get()
 
-    if len(password) <= 0:
-        messagebox.showerror(title="Burro", message=" ")
-    elif len(website) <= 0:
-        messagebox.showerror(title="Burro", message="Você não colocou o site anta")
-    elif len(email) <= 0:
-        messagebox.showerror(title="Burro", message="Você não colocou a email  anta")
-    else:
-        is_ok = messagebox.askokcancel(
-            title=website,
-            message=f"These are  the details entered \n {email} \n{password} \nis it ok to save?",
+    if len(website) == 0 or len(password) == 0:
+        messagebox.showinfo(
+            title="Ooops", message="Please make sure you haven't left any fields empty."
         )
-
-        if is_ok:
-            with open("password.txt", "a+") as file:
-                file.write(f"{website} | {email} | {password}")
-                website_entry.delete(0, tk.END)
-                password_entry.delete(0, tk.END)
+    else:
+        with open("data.json", "a") as data_file:
+            data_file.write(f"{website} | {email} | {password}\n")
+            website_entry.delete(0, tk.END)
+            password_entry.delete(0, tk.END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -149,10 +141,13 @@ website_label = tk.Label()
 website_label.config(text="Website:")
 website_label.grid(column=0, row=1)
 
-website_entry = tk.Entry(width=35)
+website_entry = tk.Entry(width=21)
 website_entry.focus()
-website_entry.grid(column=1, row=1, columnspan=2, padx=5, pady=5)
+website_entry.grid(column=1, row=1)
 
+search_btn = tk.Button()
+search_btn.config(text="Search")
+search_btn.grid(column=2, row=1)
 
 email_user_label = tk.Label()
 email_user_label.config(text="Email/Username:")
