@@ -1,6 +1,10 @@
 {
-    "teste": {
+    "Facebook": {
+        "email": "face@email.com",
+        "password": "senhaface"
+    },
+    "Github": {
         "email": "email@email.com",
-        "password": "senha foda"
+        "password": "ENZ&+%p2WLI1&0l"
     }
 }

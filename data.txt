@@ -1,2 +1,0 @@
-teste | email@email.com | senhasegura
-flatnotes | email@email.com | senhasegura2

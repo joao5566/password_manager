@@ -50,7 +50,18 @@ def generate_password():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 
+    
 def save():
+
+    def open_json(file, mode = "r", data = {}):
+        if mode.lower() == "w":
+            with open(file, "w") as file:
+                json.dump(data,file,indent=4)
+        elif mode.lower() == "r":
+            with open(file, "r") as file:
+                return json.load(file)
+            
+    
     website = website_entry.get()
     email = email_user_entry.get()
     password = password_entry.get()
@@ -68,18 +79,33 @@ def save():
         )
     else:
         try:
-            with open("data.json", "r") as data_file:
-                #json.dump(new_data,data_file,indent=4)
-                data = json.load(data_file)
-                data.update(new_data)
-            with open("data.json","w") as data_file:
-                    json.dump(data,data_file,indent=4)
-                    website_entry.delete(0, tk.END)
-                    password_entry.delete(0, tk.END)
+            data = open_json("data.json","r")  
+            data.update(new_data)
+            open_json("data.json","w",data)
+            website_entry.delete(0, tk.END)
+            password_entry.delete(0, tk.END)            
         except FileNotFoundError:
-            with open("data.json","w") as data_file:
-               json.dump(new_data,data_file,indent=4) 
+            open_json("data.json","w",new_data)
+            website_entry.delete(0, tk.END)
+            password_entry.delete(0, tk.END)
 
+
+            
+
+#--------------------Search password ---------------------------------#
+def search_pass():
+    try:
+        with open("data.json","r") as file:
+            open_file= json.load(file)
+            website = website_entry.get()
+            pyperclip.copy(open_file[website]["password"])
+            messagebox.showinfo(title=f"{website}",message=f"Email: {open_file[website]["email"]}\n Password: {open_file[website]["password"]}")
+
+    except KeyError:
+       messagebox.showinfo(title="Ooops",message="password not found") 
+    except FileNotFoundError:
+        messagebox.showinfo("Ooops",message="you don't have any saved passwords yet")
+    
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = tk.Tk()
@@ -110,7 +136,7 @@ website_entry.focus()
 website_entry.grid(column=1, row=1)
 
 search_btn = tk.Button()
-search_btn.config(text="Search")
+search_btn.config(text="Search",command=search_pass)
 search_btn.grid(column=2, row=1)
 
 email_user_label = tk.Label()
